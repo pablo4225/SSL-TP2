@@ -3,23 +3,48 @@
 %}
 
 %union{
-        double dval;
+        double VALOR;
 }
 
-%token  <dval> NUMERO 
-%token  SIMB_MAS    SIMB_MENOS   MULTI	DIVIDIR  POTENCIA
-%token  PARENT_IZQUIERDO	PARENT_DERECHO
+%token  <VALOR> NUMERO 
+%token  SUMA    RESTA
+%token  PARENIZQUIERDO  PARENDERECHO
+%token  PUNTOYCOMA
 %token  FIN
+%token  FDT
 
 %left   SIMB_MAS    SIMB_MENOS
-%left   MULTI  DIVIDIR
-%left   NEGADO
-%right  POTENCIA
 
-%type <dval> Expresion
-%start Input
+%type <VALOR> Expresion
+%start objetivo
 
 %%
+
+objetivo: programa FDT
+
+programa: INICIO listaSentencias FIN
+
+listaSentencias: sentencia {sentencia}
+
+sentencia:  ID ASIGNACION expresion PUNTOYCOMA
+         | LEER PARENIZQUIERDO listaIdentificadores PARENDERECHO PUNTOYCOMA
+         | ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PUNTOYCOMA
+
+listaIdentificadores: ID {COMA ID}
+
+listaExpresiones: expresion {COMA expresion}
+
+expresion: primaria {operadorAditivo primaria}
+
+primaria: ID
+        | CONSTANTE
+        | PARENIZQUIERDO expresion PARENDERECHO
+
+operadorAditivo: SUMA
+               | RESTA
+
+
+
 
 Input:	Linea
 	| Input Linea
@@ -41,7 +66,7 @@ Expresion:	NUMERO                        { $$=$1; }
 
 %%
 int yyerror(char *s) {
-  printf("Error: no se reconoce la operación.\n");
+  printf("Error: no se reconoce la operacion.\n");
 }
 
 int main(void) {
