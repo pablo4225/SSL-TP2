@@ -1,72 +1,59 @@
 %{
-#include <math.h>
+    #include <math.h>
 %}
 
 %union{
-        double VALOR;
+        int valor;
+        char valorString[32];
 }
 
-%token  <VALOR> NUMERO 
+%token  <valor> CONSTANTE
 %token  SUMA    RESTA
 %token  PARENIZQUIERDO  PARENDERECHO
 %token  PUNTOYCOMA
 %token  FIN
 %token  FDT
 
-%left   SIMB_MAS    SIMB_MENOS
+%left   SUMA    RESTA
+%left   ASIGNACION
 
-%type <VALOR> Expresion
-%start objetivo
+%type <valor> Expresion
+%start programa
 
 %%
 
-objetivo: programa FDT
+programa: INICIO listaSentencias FIN;
 
-programa: INICIO listaSentencias FIN
+listaSentencias: sentencia
+               | sentencia listaSentencias
+               ;
 
-listaSentencias: sentencia {sentencia}
-
-sentencia:  ID ASIGNACION expresion PUNTOYCOMA
+sentencia: ID ASIGNACION expresion PUNTOYCOMA
          | LEER PARENIZQUIERDO listaIdentificadores PARENDERECHO PUNTOYCOMA
          | ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PUNTOYCOMA
+         ;
 
-listaIdentificadores: ID {COMA ID}
+listaIdentificadores: ID
+                    | ID COMA listaIdentificadores
+                    ;
 
-listaExpresiones: expresion {COMA expresion}
+listaExpresiones: expresion
+                | expresion COMA listaExpresiones
+                ;
 
-expresion: primaria {operadorAditivo primaria}
+expresion: primaria { $$=$1 }
+         | primaria SUMA primaria { $$=$1+$3 }
+         | primaria RESTA primaria { $$=$1-$3; printf }
+         ;
 
-primaria: ID
-        | CONSTANTE
-        | PARENIZQUIERDO expresion PARENDERECHO
-
-operadorAditivo: SUMA
-               | RESTA
-
-
-
-
-Input:	Linea
-	| Input Linea
-    ;
-
-Linea:	FIN
-        | Expresion FIN                { printf("Resultado: %f\n",$1); }
-        ;
-
-Expresion:	NUMERO                        { $$=$1; }
-        | Expresion SIMB_MAS Expresion    { $$=$1+$3; }
-        | Expresion SIMB_MENOS Expresion   { $$=$1-$3; }
-        | Expresion MULTI Expresion   { $$=$1*$3; }
-        | Expresion DIVIDIR Expresion  { $$=$1/$3; }
-        | SIMB_MENOS Expresion %prec NEGADO    { $$=-$2; }
-        | Expresion POTENCIA Expresion   { $$=pow($1,$3); }
-        | PARENT_IZQUIERDO Expresion PARENT_DERECHO { $$=$2; }
+primaria: ID    { $$=$1; }
+        | CONSTANTE { $$=$1; }
+        | PARENIZQUIERDO expresion PARENDERECHO { $$=$2; }
         ;
 
 %%
 int yyerror(char *s) {
-  printf("Error: no se reconoce la operacion.\n");
+  printf("Error: no se reconoce el programa.\n");
 }
 
 int main(void) {
