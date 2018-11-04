@@ -1,5 +1,7 @@
 %{
+    #include <stdio.h>
     #include <math.h>
+    #include <stdlib.h>
 %}
 
 %union{
@@ -65,6 +67,8 @@ struct{
     int Valor;
 }variables[30];
 
+extern FILE *yyin;
+
 int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
 }
@@ -116,6 +120,16 @@ int leerVariable (char *Name){   // Esta funcion se usa como X = leerVariable(no
      return variables[x].Valor;
 }
 
-int main(void) {
-  yyparse();
+int main(int argc, char *argv[]) {
+    FILE *punteroArchivo;
+    if (argc == 2) {
+        // viene una ruta por parámetro
+        punteroArchivo = fopen(argv[1],"r");
+        yyin = fopen(argv[1],"r");
+        yyparse();
+        fclose(punteroArchivo);
+    }
+    else {
+        yyparse();    
+    }    
 }

@@ -69,7 +69,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2058 of yacc.c  */
-#line 5 "micro.y"
+#line 7 "micro.y"
 
         int valor;
         char valorString[32];

@@ -65,10 +65,12 @@
 /* Line 371 of yacc.c  */
 #line 1 "micro.y"
 
+    #include <stdio.h>
     #include <math.h>
+    #include <stdlib.h>
 
 /* Line 371 of yacc.c  */
-#line 72 "micro.tab.c"
+#line 74 "micro.tab.c"
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -127,14 +129,14 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 387 of yacc.c  */
-#line 5 "micro.y"
+#line 7 "micro.y"
 
         int valor;
         char valorString[32];
 
 
 /* Line 387 of yacc.c  */
-#line 138 "micro.tab.c"
+#line 140 "micro.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -162,7 +164,7 @@ int yyparse ();
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 166 "micro.tab.c"
+#line 168 "micro.tab.c"
 
 #ifdef short
 # undef short
@@ -456,8 +458,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    33,    33,    35,    36,    39,    40,    41,    44,    45,
-      48,    49,    52,    53,    54,    57,    58,    59
+       0,    35,    35,    37,    38,    41,    42,    43,    46,    47,
+      50,    51,    54,    55,    56,    59,    60,    61
 };
 #endif
 
@@ -1365,61 +1367,61 @@ yyreduce:
     {
         case 8:
 /* Line 1792 of yacc.c  */
-#line 44 "micro.y"
+#line 46 "micro.y"
     { escanearVariable((yyvsp[(1) - (1)].valorString)); }
     break;
 
   case 9:
 /* Line 1792 of yacc.c  */
-#line 45 "micro.y"
+#line 47 "micro.y"
     { escanearVariable((yyvsp[(3) - (3)].valorString)); }
     break;
 
   case 10:
 /* Line 1792 of yacc.c  */
-#line 48 "micro.y"
+#line 50 "micro.y"
     { printf("Valor reducido: %d\n",(yyvsp[(1) - (1)].valor)); }
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
-#line 52 "micro.y"
+#line 54 "micro.y"
     { (yyval.valor)=(yyvsp[(1) - (1)].valor); }
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
-#line 53 "micro.y"
+#line 55 "micro.y"
     { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); }
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
-#line 54 "micro.y"
+#line 56 "micro.y"
     { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); }
     break;
 
   case 15:
 /* Line 1792 of yacc.c  */
-#line 57 "micro.y"
+#line 59 "micro.y"
     {(yyval.valor) = leerVariable((yyvsp[(1) - (1)].valorString)); }
     break;
 
   case 16:
 /* Line 1792 of yacc.c  */
-#line 58 "micro.y"
+#line 60 "micro.y"
     { (yyval.valor)=(yyvsp[(1) - (1)].valor); }
     break;
 
   case 17:
 /* Line 1792 of yacc.c  */
-#line 59 "micro.y"
+#line 61 "micro.y"
     { (yyval.valor)=(yyvsp[(2) - (3)].valor); }
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1423 "micro.tab.c"
+#line 1425 "micro.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1651,12 +1653,14 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 62 "micro.y"
+#line 64 "micro.y"
 
 struct{
     char Nombre[32];
     int Valor;
 }variables[30];
+
+extern FILE *yyin;
 
 int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
@@ -1709,6 +1713,16 @@ int leerVariable (char *Name){   // Esta funcion se usa como X = leerVariable(no
      return variables[x].Valor;
 }
 
-int main(void) {
-  yyparse();
+int main(int argc, char *argv[]) {
+    FILE *punteroArchivo;
+    if (argc == 2) {
+        // viene una ruta por parámetro
+        punteroArchivo = fopen(argv[1],"r");
+        yyin = fopen(argv[1],"r");
+        yyparse();
+        fclose(punteroArchivo);
+    }
+    else {
+        yyparse();    
+    }    
 }
