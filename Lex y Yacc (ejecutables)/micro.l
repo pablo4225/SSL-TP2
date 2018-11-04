@@ -17,12 +17,14 @@ identificador	[a-zA-Z][0-9a-zA-Z]*
 
 "leer"			return(LEER);
 "escribir"		return(ESCRIBIR);
+"inicio"		return(INICIO);
+"fin"			return(FIN);
 {identificador}	return(ID);					
 {constante}		{
-					yyval.valor = atoi(yytext);
+					yylval.valor = atoi(yytext);
 					return(CONSTANTE);
 				}
-":="			return(ASIGNACION)
+":="			return(ASIGNACION);
 "+"           	return(SUMA);
 "-"           	return(RESTA);
 ","				return(COMA);

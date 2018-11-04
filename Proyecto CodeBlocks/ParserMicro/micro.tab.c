@@ -1376,13 +1376,13 @@ yyreduce:
   case 13:
 /* Line 1792 of yacc.c  */
 #line 53 "micro.y"
-    { (yyval.valorString)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); }
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
 #line 54 "micro.y"
-    { (yyval.valorString)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); }
     break;
 
   case 16:
@@ -1394,7 +1394,7 @@ yyreduce:
   case 17:
 /* Line 1792 of yacc.c  */
 #line 59 "micro.y"
-    { (yyval.valor)=(yyvsp[(2) - (3)].valorString); }
+    { (yyval.valor)=(yyvsp[(2) - (3)].valor); }
     break;
 
 

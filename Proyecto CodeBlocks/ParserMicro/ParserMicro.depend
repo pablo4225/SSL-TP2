@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1541347507 source:c:\users\compaq pc\documents\github\ssl-tp2\proyecto codeblocks\parsermicro\lex.yy.c
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<inttypes.h>
+	"micro.tab.h"
+	<stdlib.h>
+	<stdio.h>
+	<unistd.h>
+
+1541347511 c:\users\compaq pc\documents\github\ssl-tp2\proyecto codeblocks\parsermicro\micro.tab.h
+
+1541347511 source:c:\users\compaq pc\documents\github\ssl-tp2\proyecto codeblocks\parsermicro\micro.tab.c
+	<math.h>
+	<stddef.h>
+	<libintl.h>
+	<alloca.h>
+	<malloc.h>
+	<stdlib.h>
+	<stdlib.h>
+	<stdio.h>
+

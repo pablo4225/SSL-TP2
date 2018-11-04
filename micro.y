@@ -23,7 +23,7 @@
 %left   SUMA    RESTA
 %left   ASIGNACION
 
-%type   <valorString> expresion
+%type   <valor> expresion
 %type   <valor> primaria
 
 %start programa
