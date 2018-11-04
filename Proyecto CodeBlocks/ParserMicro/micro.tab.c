@@ -382,7 +382,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  8
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   42
+#define YYLAST   29
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  18
@@ -448,7 +448,7 @@ static const yytype_int8 yyrhs[] =
       19,     0,    -1,     8,    20,    15,    -1,    21,    -1,    21,
       20,    -1,     9,    17,    24,    14,    -1,     6,    12,    22,
       13,    14,    -1,     7,    12,    23,    13,    14,    -1,     9,
-      -1,     9,     5,    22,    -1,    24,    -1,    24,     5,    23,
+      -1,    22,     5,     9,    -1,    24,    -1,    24,     5,    23,
       -1,    25,    -1,    25,    10,    25,    -1,    25,    11,    25,
       -1,     9,    -1,     3,    -1,    12,    24,    13,    -1
 };
@@ -517,19 +517,19 @@ static const yytype_int8 yydefgoto[] =
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -17
+#define YYPACT_NINF -13
 static const yytype_int8 yypact[] =
 {
-      -1,    -4,     4,     2,     3,     1,     5,    -4,   -17,     7,
-      -3,    -3,   -17,   -17,    12,     6,   -17,   -17,    -3,     8,
-      17,     0,     9,     7,    10,    13,    11,    -3,    -3,    -3,
-     -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17
+      -1,     6,     2,     7,     8,    -7,     3,     6,   -13,     5,
+      -3,    -3,   -13,   -13,   -13,    -2,   -13,   -13,    -3,     9,
+      16,    -6,    10,    14,    11,    13,    15,    -3,    -3,    -3,
+     -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -17,   -17,    20,   -17,    14,    15,   -10,   -16
+     -13,   -13,    20,   -13,   -13,     1,   -10,   -12
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -538,26 +538,22 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      16,    22,     3,     4,     8,     5,    17,     1,    25,    18,
-      28,    29,    36,    37,     9,    10,    14,    23,    11,    24,
-      12,    26,    27,    30,    32,    34,    33,    13,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,    31,     0,     0,
-       0,     0,    35
+      16,    22,     8,    23,    28,    29,    17,     1,    25,    18,
+      11,    24,     3,     4,    14,     5,    36,    37,    12,     9,
+      10,    27,    26,    31,    30,    32,    33,    13,    35,    34
 };
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-17)))
+  (!!((Yystate) == (-13)))
 
 #define yytable_value_is_error(Yytable_value) \
   YYID (0)
 
-static const yytype_int8 yycheck[] =
+static const yytype_uint8 yycheck[] =
 {
-       3,    11,     6,     7,     0,     9,     9,     8,    18,    12,
-      10,    11,    28,    29,    12,    12,     9,     5,    17,    13,
-      15,    13,     5,    14,    14,    14,    13,     7,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    23,    -1,    -1,
-      -1,    -1,    27
+       3,    11,     0,     5,    10,    11,     9,     8,    18,    12,
+      17,    13,     6,     7,     9,     9,    28,    29,    15,    12,
+      12,     5,    13,     9,    14,    14,    13,     7,    27,    14
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -567,7 +563,7 @@ static const yytype_uint8 yystos[] =
        0,     8,    19,     6,     7,     9,    20,    21,     0,    12,
       12,    17,    15,    20,     9,    22,     3,     9,    12,    23,
       24,    25,    24,     5,    13,    24,    13,     5,    10,    11,
-      14,    22,    14,    13,    14,    23,    25,    25
+      14,     9,    14,    13,    14,    23,    25,    25
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1367,10 +1363,28 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 12:
+        case 8:
+/* Line 1792 of yacc.c  */
+#line 44 "micro.y"
+    { escanearVariable((yyvsp[(1) - (1)].valorString)); }
+    break;
+
+  case 9:
+/* Line 1792 of yacc.c  */
+#line 45 "micro.y"
+    { escanearVariable((yyvsp[(3) - (3)].valorString)); }
+    break;
+
+  case 10:
+/* Line 1792 of yacc.c  */
+#line 48 "micro.y"
+    { printf("Valor reducido: %d\n",(yyvsp[(1) - (1)].valor)); }
+    break;
+
+  case 12:
 /* Line 1792 of yacc.c  */
 #line 52 "micro.y"
-    { printf("Valor reducido: %d",(yyvsp[(1) - (1)].valor)); }
+    { (yyval.valor)=(yyvsp[(1) - (1)].valor); }
     break;
 
   case 13:
@@ -1399,7 +1413,7 @@ yyreduce:
 
 
 /* Line 1792 of yacc.c  */
-#line 1403 "micro.tab.c"
+#line 1417 "micro.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1637,6 +1651,17 @@ int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
 }
 
+void escanearVariable(char *id) {
+    int valorVariable;
+    printf("\nIngrese un valor para %s:", id);
+    scanf("%d", &valorVariable);
+    actualizarVariable(id, valorVariable);
+}
+
+void actualizarVariable(char *nombreVariable, int valorVariable)
+{
+    printf("%s := %d\n", nombreVariable, valorVariable);
+}
 int main(void) {
   yyparse();
 }

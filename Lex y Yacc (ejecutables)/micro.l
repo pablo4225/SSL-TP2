@@ -19,7 +19,10 @@ identificador	[a-zA-Z][0-9a-zA-Z]*
 "escribir"		return(ESCRIBIR);
 "inicio"		return(INICIO);
 "fin"			return(FIN);
-{identificador}	return(ID);					
+{identificador}	{
+					strcpy(yylval.valorString,yytext);
+					return(ID);
+				}
 {constante}		{
 					yylval.valor = atoi(yytext);
 					return(CONSTANTE);

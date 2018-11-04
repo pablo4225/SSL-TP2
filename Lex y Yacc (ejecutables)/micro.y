@@ -13,7 +13,7 @@
 %token  LEER
 %token  ESCRIBIR
 %token  INICIO
-%token  ID
+%token  <valorString> ID
 %token  SUMA    RESTA
 %token  PARENIZQUIERDO  PARENDERECHO
 %token  PUNTOYCOMA
@@ -41,15 +41,15 @@ sentencia: ID ASIGNACION expresion PUNTOYCOMA
          | ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PUNTOYCOMA
          ;
 
-listaIdentificadores: ID
-                    | ID COMA listaIdentificadores
+listaIdentificadores: ID { escanearVariable($1); }
+                    | listaIdentificadores COMA ID { escanearVariable($3); }
                     ;
 
-listaExpresiones: expresion
+listaExpresiones: expresion { printf("Valor reducido: %d\n",$1); }
                 | expresion COMA listaExpresiones
                 ;
 
-expresion: primaria { printf("Valor reducido: %d",$1); }
+expresion: primaria { $$=$1; }
          | primaria SUMA primaria { $$=$1+$3; }
          | primaria RESTA primaria { $$=$1-$3; }
          ;
@@ -64,6 +64,17 @@ int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
 }
 
+void escanearVariable(char *id) {
+    int valorVariable;
+    printf("\nIngrese un valor para %s:", id);
+    scanf("%d", &valorVariable);
+    actualizarVariable(id, valorVariable);
+}
+
+void actualizarVariable(char *nombreVariable, int valorVariable)
+{
+    printf("%s := %d\n", nombreVariable, valorVariable);
+}
 int main(void) {
   yyparse();
 }

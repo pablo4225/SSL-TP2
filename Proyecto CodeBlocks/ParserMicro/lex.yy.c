@@ -774,11 +774,14 @@ return(FIN);
 case 6:
 YY_RULE_SETUP
 #line 22 "micro.l"
-return(ID);					
+{
+					strcpy(yylval.valorString,yytext);
+					return(ID);
+				}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "micro.l"
+#line 26 "micro.l"
 {
 					yylval.valor = atoi(yytext);
 					return(CONSTANTE);
@@ -786,45 +789,45 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 27 "micro.l"
+#line 30 "micro.l"
 return(ASIGNACION);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 28 "micro.l"
+#line 31 "micro.l"
 return(SUMA);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 29 "micro.l"
+#line 32 "micro.l"
 return(RESTA);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 30 "micro.l"
+#line 33 "micro.l"
 return(COMA);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 31 "micro.l"
+#line 34 "micro.l"
 return(PARENIZQUIERDO);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 32 "micro.l"
+#line 35 "micro.l"
 return(PARENDERECHO);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 33 "micro.l"
+#line 36 "micro.l"
 return(PUNTOYCOMA);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 35 "micro.l"
+#line 38 "micro.l"
 ECHO;
 	YY_BREAK
-#line 828 "lex.yy.c"
+#line 831 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1818,7 +1821,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 34 "micro.l"
+#line 37 "micro.l"
 
 
 
