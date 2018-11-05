@@ -31,9 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="lex.yy.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="micro.tab.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="micro.tab.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

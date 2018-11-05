@@ -1,5 +1,11 @@
 inicio
-leer(a,b);
-escribir(c,a+b);
-escribir(d,a-b);
+var1:=10;
+leer(a,b,c);
+var2:=5;
+escribir(a+1,1+b,c+1);
+escribir(var1,var1+var2,var1-var2);
+var1:=4;
+var2:=4;
+escribir(var1+var2);
+escribir(2+2+1+4+7);
 fin

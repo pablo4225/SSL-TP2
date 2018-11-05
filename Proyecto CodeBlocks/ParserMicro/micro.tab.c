@@ -384,7 +384,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  8
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   35
+#define YYLAST   29
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  18
@@ -450,7 +450,7 @@ static const yytype_int8 yyrhs[] =
       19,     0,    -1,     8,    20,    15,    -1,    21,    -1,    21,
       20,    -1,     9,    17,    24,    14,    -1,     6,    12,    22,
       13,    14,    -1,     7,    12,    23,    13,    14,    -1,     9,
-      -1,    22,     5,     9,    -1,    24,    -1,    24,     5,    23,
+      -1,    22,     5,     9,    -1,    24,    -1,    23,     5,    24,
       -1,    25,    -1,    25,    10,    24,    -1,    25,    11,    24,
       -1,     9,    -1,     3,    -1,    12,    24,    13,    -1
 };
@@ -508,7 +508,7 @@ static const yytype_uint8 yydefact[] =
        0,     0,     0,     0,     0,     0,     0,     3,     1,     0,
        0,     0,     2,     4,     8,     0,    16,    15,     0,     0,
       10,    12,     0,     0,     0,     0,     0,     0,     0,     0,
-       5,     9,     6,    17,     7,    11,    13,    14
+       5,     9,     6,    17,    11,     7,    13,    14
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -522,16 +522,16 @@ static const yytype_int8 yydefgoto[] =
 #define YYPACT_NINF -12
 static const yytype_int8 yypact[] =
 {
-       6,    -3,     5,    -2,     3,     4,     1,    -3,   -12,    10,
-      -1,    -1,   -12,   -12,   -12,    -4,   -12,   -12,    -1,     7,
-      17,     2,     9,    15,    11,    13,    14,    -1,    -1,    -1,
+       2,    -3,    12,     4,    10,     6,    11,    -3,   -12,     5,
+      -1,    -1,   -12,   -12,   -12,    -4,   -12,   -12,    -1,     0,
+     -12,     9,     7,    15,    13,    16,    -1,    14,    -1,    -1,
      -12,   -12,   -12,   -12,   -12,   -12,   -12,   -12
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -12,   -12,    20,   -12,   -12,     8,   -11,   -12
+     -12,   -12,    18,   -12,   -12,   -12,   -11,   -12
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -540,10 +540,9 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      22,    23,    16,     3,     4,     8,     5,    25,    17,    24,
-       9,    18,    28,    29,     1,    10,    12,    36,    37,    14,
-      26,    11,    27,    30,    31,    32,    33,    13,    34,     0,
-       0,     0,     0,     0,     0,    35
+      22,    23,    16,     3,     4,    26,     5,    25,    17,    24,
+       1,    18,     8,    27,    14,    34,     9,    36,    37,    28,
+      29,    30,    10,    11,    31,    13,    12,    32,    35,    33
 };
 
 #define yypact_value_is_default(Yystate) \
@@ -552,12 +551,11 @@ static const yytype_uint8 yytable[] =
 #define yytable_value_is_error(Yytable_value) \
   YYID (0)
 
-static const yytype_int8 yycheck[] =
+static const yytype_uint8 yycheck[] =
 {
-      11,     5,     3,     6,     7,     0,     9,    18,     9,    13,
-      12,    12,    10,    11,     8,    12,    15,    28,    29,     9,
-      13,    17,     5,    14,     9,    14,    13,     7,    14,    -1,
-      -1,    -1,    -1,    -1,    -1,    27
+      11,     5,     3,     6,     7,     5,     9,    18,     9,    13,
+       8,    12,     0,    13,     9,    26,    12,    28,    29,    10,
+      11,    14,    12,    17,     9,     7,    15,    14,    14,    13
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -566,8 +564,8 @@ static const yytype_uint8 yystos[] =
 {
        0,     8,    19,     6,     7,     9,    20,    21,     0,    12,
       12,    17,    15,    20,     9,    22,     3,     9,    12,    23,
-      24,    25,    24,     5,    13,    24,    13,     5,    10,    11,
-      14,     9,    14,    13,    14,    23,    24,    24
+      24,    25,    24,     5,    13,    24,     5,    13,    10,    11,
+      14,     9,    14,    13,    24,    14,    24,    24
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1373,6 +1371,12 @@ yyreduce:
     { imprimirVariables(); }
     break;
 
+  case 5:
+/* Line 1792 of yacc.c  */
+#line 41 "micro.y"
+    { escribirVariable((yyvsp[(1) - (4)].valorString),(yyvsp[(3) - (4)].valor)); }
+    break;
+
   case 8:
 /* Line 1792 of yacc.c  */
 #line 46 "micro.y"
@@ -1388,25 +1392,31 @@ yyreduce:
   case 10:
 /* Line 1792 of yacc.c  */
 #line 50 "micro.y"
-    { }
+    { printf("%d\n", (yyvsp[(1) - (1)].valor)); }
+    break;
+
+  case 11:
+/* Line 1792 of yacc.c  */
+#line 51 "micro.y"
+    { printf("%d\n", (yyvsp[(3) - (3)].valor)); }
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
 #line 54 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (1)].valor); printf("%d\n", (yyvsp[(1) - (1)].valor)); }
+    { (yyval.valor)=(yyvsp[(1) - (1)].valor); /* printf("prim: %d\n", $1);*/ }
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
 #line 55 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); printf("%d\n", (yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor)); }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); /*printf("prim + prim: %d\n", $$);*/ }
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
 #line 56 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); printf("%d\n", (yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor)); }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); /*printf("prim - prim: %d\n", $$);*/ }
     break;
 
   case 15:
@@ -1424,12 +1434,12 @@ yyreduce:
   case 17:
 /* Line 1792 of yacc.c  */
 #line 61 "micro.y"
-    { (yyval.valor)=(yyvsp[(2) - (3)].valor); }
+    { (yyval.valor)=(yyvsp[(2) - (3)].valor); /*printf("(exp): %d\n",$2);*/ }
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1433 "micro.tab.c"
+#line 1443 "micro.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1673,8 +1683,6 @@ struct{
 }variables[MAX_VARIABLES];
 
 extern FILE *yyin; // Se agrega para que pueda enviarse un puntero a un archivo y ser parseado
-char *nombreID; // Acá se guarda la id de la variable a actualizar
-int flagMemorizarNombre=1; // flag activado
 
 int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
@@ -1729,22 +1737,12 @@ int leerVariable (char *Name){   // Esta funcion se usa como X = leerVariable(no
 void imprimirVariables(void)
 {
     int i;
-    printf("VARIABLES\n");
+    printf("\nVARIABLES\n");
     printf("NOMBRE | Valor\n");
 
     for(i=0; i < MAX_VARIABLES; i++) {
         if (strlen(variables[i].nombre)!= 0)
         printf("%s | %d\n", variables[i].nombre, variables[i].valor);
-    }
-}
-
-void memorizarNombre(char *nombre)
-{
-    printf("Viene ID por parametro: %s",nombre);
-    if (flagMemorizarNombre == 1)
-    {
-        strcpy(nombreID,nombre);
-        flagMemorizarNombre = 0;
     }
 }
 

@@ -38,7 +38,7 @@ listaSentencias: sentencia
                | sentencia listaSentencias
                ;
 
-sentencia: ID ASIGNACION expresion PUNTOYCOMA
+sentencia: ID ASIGNACION expresion PUNTOYCOMA { escribirVariable($1,$3); }
          | LEER PARENIZQUIERDO listaIdentificadores PARENDERECHO PUNTOYCOMA
          | ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PUNTOYCOMA
          ;
@@ -47,18 +47,18 @@ listaIdentificadores: ID { escanearVariable($1); }
                     | listaIdentificadores COMA ID { escanearVariable($3); }
                     ;
 
-listaExpresiones: expresion { }
-                | expresion COMA listaExpresiones
+listaExpresiones: expresion { printf("%d\n", $1); }
+                | listaExpresiones COMA expresion { printf("%d\n", $3); }
                 ;
 
-expresion: primaria { $$=$1; printf("%d\n", $1); }
-         | primaria SUMA expresion { $$=$1+$3; printf("%d\n", $1+$3); }
-         | primaria RESTA expresion { $$=$1-$3; printf("%d\n", $1-$3); }
+expresion: primaria { $$=$1; /* printf("prim: %d\n", $1);*/ }
+         | primaria SUMA expresion { $$=$1+$3; /*printf("prim + prim: %d\n", $$);*/ }
+         | primaria RESTA expresion { $$=$1-$3; /*printf("prim - prim: %d\n", $$);*/ }
          ;
 
 primaria: ID { $$ = leerVariable($1); /*Aca lee los id*/ }
         | CONSTANTE { $$=$1; }
-        | PARENIZQUIERDO expresion PARENDERECHO { $$=$2; }
+        | PARENIZQUIERDO expresion PARENDERECHO { $$=$2; /*printf("(exp): %d\n",$2);*/ }
         ;
 
 %%
@@ -72,8 +72,6 @@ struct{
 }variables[MAX_VARIABLES];
 
 extern FILE *yyin; // Se agrega para que pueda enviarse un puntero a un archivo y ser parseado
-char *nombreID; // Acá se guarda la id de la variable a actualizar
-int flagMemorizarNombre=1; // flag activado
 
 int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
@@ -128,22 +126,12 @@ int leerVariable (char *Name){   // Esta funcion se usa como X = leerVariable(no
 void imprimirVariables(void)
 {
     int i;
-    printf("VARIABLES\n");
+    printf("\nVARIABLES\n");
     printf("NOMBRE | Valor\n");
 
     for(i=0; i < MAX_VARIABLES; i++) {
         if (strlen(variables[i].nombre)!= 0)
         printf("%s | %d\n", variables[i].nombre, variables[i].valor);
-    }
-}
-
-void memorizarNombre(char *nombre)
-{
-    printf("Viene ID por parametro: %s",nombre);
-    if (flagMemorizarNombre == 1)
-    {
-        strcpy(nombreID,nombre);
-        flagMemorizarNombre = 0;
     }
 }
 
