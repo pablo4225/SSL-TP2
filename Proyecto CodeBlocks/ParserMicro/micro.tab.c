@@ -384,7 +384,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  8
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   29
+#define YYLAST   35
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  18
@@ -451,7 +451,7 @@ static const yytype_int8 yyrhs[] =
       20,    -1,     9,    17,    24,    14,    -1,     6,    12,    22,
       13,    14,    -1,     7,    12,    23,    13,    14,    -1,     9,
       -1,    22,     5,     9,    -1,    24,    -1,    24,     5,    23,
-      -1,    25,    -1,    25,    10,    25,    -1,    25,    11,    25,
+      -1,    25,    -1,    25,    10,    24,    -1,    25,    11,    24,
       -1,     9,    -1,     3,    -1,    12,    24,    13,    -1
 };
 
@@ -519,19 +519,19 @@ static const yytype_int8 yydefgoto[] =
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -13
+#define YYPACT_NINF -12
 static const yytype_int8 yypact[] =
 {
-      -1,     6,     2,     7,     8,    -7,     3,     6,   -13,     5,
-      -3,    -3,   -13,   -13,   -13,    -2,   -13,   -13,    -3,     9,
-      16,    -6,    10,    14,    11,    13,    15,    -3,    -3,    -3,
-     -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13
+       6,    -3,     5,    -2,     3,     4,     1,    -3,   -12,    10,
+      -1,    -1,   -12,   -12,   -12,    -4,   -12,   -12,    -1,     7,
+      17,     2,     9,    15,    11,    13,    14,    -1,    -1,    -1,
+     -12,   -12,   -12,   -12,   -12,   -12,   -12,   -12
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -13,   -13,    20,   -13,   -13,     1,   -10,   -12
+     -12,   -12,    20,   -12,   -12,     8,   -11,   -12
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -540,22 +540,24 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      16,    22,     8,    23,    28,    29,    17,     1,    25,    18,
-      11,    24,     3,     4,    14,     5,    36,    37,    12,     9,
-      10,    27,    26,    31,    30,    32,    33,    13,    35,    34
+      22,    23,    16,     3,     4,     8,     5,    25,    17,    24,
+       9,    18,    28,    29,     1,    10,    12,    36,    37,    14,
+      26,    11,    27,    30,    31,    32,    33,    13,    34,     0,
+       0,     0,     0,     0,     0,    35
 };
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-13)))
+  (!!((Yystate) == (-12)))
 
 #define yytable_value_is_error(Yytable_value) \
   YYID (0)
 
-static const yytype_uint8 yycheck[] =
+static const yytype_int8 yycheck[] =
 {
-       3,    11,     0,     5,    10,    11,     9,     8,    18,    12,
-      17,    13,     6,     7,     9,     9,    28,    29,    15,    12,
-      12,     5,    13,     9,    14,    14,    13,     7,    27,    14
+      11,     5,     3,     6,     7,     0,     9,    18,     9,    13,
+      12,    12,    10,    11,     8,    12,    15,    28,    29,     9,
+      13,    17,     5,    14,     9,    14,    13,     7,    14,    -1,
+      -1,    -1,    -1,    -1,    -1,    27
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -565,7 +567,7 @@ static const yytype_uint8 yystos[] =
        0,     8,    19,     6,     7,     9,    20,    21,     0,    12,
       12,    17,    15,    20,     9,    22,     3,     9,    12,    23,
       24,    25,    24,     5,    13,    24,    13,     5,    10,    11,
-      14,     9,    14,    13,    14,    23,    25,    25
+      14,     9,    14,    13,    14,    23,    24,    24
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1365,7 +1367,13 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 8:
+        case 2:
+/* Line 1792 of yacc.c  */
+#line 35 "micro.y"
+    { imprimirVariables(); }
+    break;
+
+  case 8:
 /* Line 1792 of yacc.c  */
 #line 46 "micro.y"
     { escanearVariable((yyvsp[(1) - (1)].valorString)); }
@@ -1380,31 +1388,31 @@ yyreduce:
   case 10:
 /* Line 1792 of yacc.c  */
 #line 50 "micro.y"
-    { printf("Valor reducido: %d\n",(yyvsp[(1) - (1)].valor)); }
+    { }
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
 #line 54 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (1)].valor); }
+    { (yyval.valor)=(yyvsp[(1) - (1)].valor); printf("%d\n", (yyvsp[(1) - (1)].valor)); }
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
 #line 55 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); printf("%d\n", (yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor)); }
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
 #line 56 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); printf("%d\n", (yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor)); }
     break;
 
   case 15:
 /* Line 1792 of yacc.c  */
 #line 59 "micro.y"
-    {(yyval.valor) = leerVariable((yyvsp[(1) - (1)].valorString)); }
+    { (yyval.valor) = leerVariable((yyvsp[(1) - (1)].valorString)); /*Aca lee los id*/ }
     break;
 
   case 16:
@@ -1421,7 +1429,7 @@ yyreduce:
 
 
 /* Line 1792 of yacc.c  */
-#line 1425 "micro.tab.c"
+#line 1433 "micro.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1655,12 +1663,18 @@ yyreturn:
 /* Line 2055 of yacc.c  */
 #line 64 "micro.y"
 
-struct{
-    char Nombre[32];
-    int Valor;
-}variables[30];
 
-extern FILE *yyin;
+#define MAX_VARIABLES 30
+#define MAX_NOMBRE 32
+#define NO_ENCONTRADO 55
+struct{
+    char nombre[MAX_NOMBRE];
+    int valor;
+}variables[MAX_VARIABLES];
+
+extern FILE *yyin; // Se agrega para que pueda enviarse un puntero a un archivo y ser parseado
+char *nombreID; // Acá se guarda la id de la variable a actualizar
+int flagMemorizarNombre=1; // flag activado
 
 int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
@@ -1676,41 +1690,62 @@ void escanearVariable(char *id) {
 void modVariable(char *Name,int Val){
     int x;
     x = buscarVariable(Name);
-    if (x!=55){
-        variables[x].Valor=Val;
+    if (x!=NO_ENCONTRADO){
+        variables[x].valor=Val;
     }
 }
 int buscarVariable(char *Name){
-    for(int i=0;i<30;i++){
-        if (strcmp(Name,variables[i].Nombre)==0){
+    for(int i=0; i<MAX_VARIABLES; i++){
+        if (strcmp(Name,variables[i].nombre)==0){
             return i;
         }
     }
-            return 55;
-
-    }
+    return NO_ENCONTRADO;
+}
 
 void escribirVariable(char *Name,int Val){
     int x;
     int i;
-     i = buscarVariable(Name);
-     if (i==55){
+    i = buscarVariable(Name); 
+     if (i==NO_ENCONTRADO){
         x = buscarVariable("");
-        if (x!=55){
+        if (x!=NO_ENCONTRADO){
             // puts("entro y copia\n");
-            strcpy(variables[x].Nombre,Name);
-            variables[x].Valor=Val;
+            strcpy(variables[x].nombre,Name);
+            variables[x].valor=Val;
         }
      }
-     if(i!=55){
+     if(i!=NO_ENCONTRADO){
         modVariable(Name,Val);
-     }
+     }     
 }
 
 int leerVariable (char *Name){   // Esta funcion se usa como X = leerVariable(nombre) y te retorna el valor de dicha variable
     int x;
-     x = buscarVariable(Name);
-     return variables[x].Valor;
+    x = buscarVariable(Name);
+    return variables[x].valor;
+}
+
+void imprimirVariables(void)
+{
+    int i;
+    printf("VARIABLES\n");
+    printf("NOMBRE | Valor\n");
+
+    for(i=0; i < MAX_VARIABLES; i++) {
+        if (strlen(variables[i].nombre)!= 0)
+        printf("%s | %d\n", variables[i].nombre, variables[i].valor);
+    }
+}
+
+void memorizarNombre(char *nombre)
+{
+    printf("Viene ID por parametro: %s",nombre);
+    if (flagMemorizarNombre == 1)
+    {
+        strcpy(nombreID,nombre);
+        flagMemorizarNombre = 0;
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -1726,3 +1761,4 @@ int main(int argc, char *argv[]) {
         yyparse();    
     }    
 }
+

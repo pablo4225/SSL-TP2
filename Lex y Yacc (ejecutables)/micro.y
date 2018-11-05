@@ -32,7 +32,7 @@
 
 %%
 
-programa: INICIO listaSentencias FIN;
+programa: INICIO listaSentencias FIN { imprimirVariables(); }
 
 listaSentencias: sentencia
                | sentencia listaSentencias
@@ -47,27 +47,33 @@ listaIdentificadores: ID { escanearVariable($1); }
                     | listaIdentificadores COMA ID { escanearVariable($3); }
                     ;
 
-listaExpresiones: expresion { printf("Valor reducido: %d\n",$1); }
+listaExpresiones: expresion { }
                 | expresion COMA listaExpresiones
                 ;
 
-expresion: primaria { $$=$1; }
-         | primaria SUMA primaria { $$=$1+$3; }
-         | primaria RESTA primaria { $$=$1-$3; }
+expresion: primaria { $$=$1; printf("%d\n", $1); }
+         | primaria SUMA expresion { $$=$1+$3; printf("%d\n", $1+$3); }
+         | primaria RESTA expresion { $$=$1-$3; printf("%d\n", $1-$3); }
          ;
 
-primaria: ID {$$ = leerVariable($1); }
+primaria: ID { $$ = leerVariable($1); /*Aca lee los id*/ }
         | CONSTANTE { $$=$1; }
         | PARENIZQUIERDO expresion PARENDERECHO { $$=$2; }
         ;
 
 %%
-struct{
-    char Nombre[32];
-    int Valor;
-}variables[30];
 
-extern FILE *yyin;
+#define MAX_VARIABLES 30
+#define MAX_NOMBRE 32
+#define NO_ENCONTRADO 55
+struct{
+    char nombre[MAX_NOMBRE];
+    int valor;
+}variables[MAX_VARIABLES];
+
+extern FILE *yyin; // Se agrega para que pueda enviarse un puntero a un archivo y ser parseado
+char *nombreID; // Acá se guarda la id de la variable a actualizar
+int flagMemorizarNombre=1; // flag activado
 
 int yyerror(char *s) {
   printf("Error: no se reconoce el programa.\n");
@@ -83,41 +89,62 @@ void escanearVariable(char *id) {
 void modVariable(char *Name,int Val){
     int x;
     x = buscarVariable(Name);
-    if (x!=55){
-        variables[x].Valor=Val;
+    if (x!=NO_ENCONTRADO){
+        variables[x].valor=Val;
     }
 }
 int buscarVariable(char *Name){
-    for(int i=0;i<30;i++){
-        if (strcmp(Name,variables[i].Nombre)==0){
+    for(int i=0; i<MAX_VARIABLES; i++){
+        if (strcmp(Name,variables[i].nombre)==0){
             return i;
         }
     }
-            return 55;
-
-    }
+    return NO_ENCONTRADO;
+}
 
 void escribirVariable(char *Name,int Val){
     int x;
     int i;
-     i = buscarVariable(Name);
-     if (i==55){
+    i = buscarVariable(Name); 
+     if (i==NO_ENCONTRADO){
         x = buscarVariable("");
-        if (x!=55){
+        if (x!=NO_ENCONTRADO){
             // puts("entro y copia\n");
-            strcpy(variables[x].Nombre,Name);
-            variables[x].Valor=Val;
+            strcpy(variables[x].nombre,Name);
+            variables[x].valor=Val;
         }
      }
-     if(i!=55){
+     if(i!=NO_ENCONTRADO){
         modVariable(Name,Val);
-     }
+     }     
 }
 
 int leerVariable (char *Name){   // Esta funcion se usa como X = leerVariable(nombre) y te retorna el valor de dicha variable
     int x;
-     x = buscarVariable(Name);
-     return variables[x].Valor;
+    x = buscarVariable(Name);
+    return variables[x].valor;
+}
+
+void imprimirVariables(void)
+{
+    int i;
+    printf("VARIABLES\n");
+    printf("NOMBRE | Valor\n");
+
+    for(i=0; i < MAX_VARIABLES; i++) {
+        if (strlen(variables[i].nombre)!= 0)
+        printf("%s | %d\n", variables[i].nombre, variables[i].valor);
+    }
+}
+
+void memorizarNombre(char *nombre)
+{
+    printf("Viene ID por parametro: %s",nombre);
+    if (flagMemorizarNombre == 1)
+    {
+        strcpy(nombreID,nombre);
+        flagMemorizarNombre = 0;
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -133,3 +160,4 @@ int main(int argc, char *argv[]) {
         yyparse();    
     }    
 }
+
