@@ -48,7 +48,7 @@ listaIdentificadores: ID { escanearVariable($1); }
                     ;
 
 listaExpresiones: expresion { printf("%d", $1); }
-                | expresion COMA listaExpresiones { printf(" %d ", $1); }
+                | listaExpresiones COMA expresion { printf(" %d ", $3); }
                 ;
 
 expresion: primaria { $$=$1; }
