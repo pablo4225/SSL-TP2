@@ -1,1 +1,1 @@
-inicio leer(x);escribir(x);fin
+inicio var1:=1;leer(var2,var3);escribir(var3-var2-var1);escribir(var3+var2+var1);escribir(x,y);fin

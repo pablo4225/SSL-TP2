@@ -48,12 +48,12 @@ listaIdentificadores: ID { escanearVariable($1); }
                     ;
 
 listaExpresiones: expresion { printf("%d", $1); }
-                | listaExpresiones COMA expresion { printf(" %d ", $3); }
+                | expresion COMA listaExpresiones { printf(" %d ", $1); }
                 ;
 
 expresion: primaria { $$=$1; }
          | primaria SUMA expresion { $$=$1+$3; }
-         | primaria RESTA expresion { $$=$1-$3; }
+         | expresion RESTA primaria { $$=$1-$3; }
          ;
 
 primaria: ID { $$ = leerVariable($1); /*Aca lee los id*/ }
