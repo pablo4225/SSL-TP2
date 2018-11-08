@@ -1377,6 +1377,12 @@ yyreduce:
     { escribirVariable((yyvsp[(1) - (4)].valorString),(yyvsp[(3) - (4)].valor)); }
     break;
 
+  case 7:
+/* Line 1792 of yacc.c  */
+#line 43 "micro.y"
+    { printf("\n"); }
+    break;
+
   case 8:
 /* Line 1792 of yacc.c  */
 #line 46 "micro.y"
@@ -1392,31 +1398,31 @@ yyreduce:
   case 10:
 /* Line 1792 of yacc.c  */
 #line 50 "micro.y"
-    { printf("%d\n", (yyvsp[(1) - (1)].valor)); }
+    { printf("%d", (yyvsp[(1) - (1)].valor)); }
     break;
 
   case 11:
 /* Line 1792 of yacc.c  */
 #line 51 "micro.y"
-    { printf("%d\n", (yyvsp[(3) - (3)].valor)); }
+    { printf(" %d ", (yyvsp[(3) - (3)].valor)); }
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
 #line 54 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (1)].valor); /* printf("prim: %d\n", $1);*/ }
+    { (yyval.valor)=(yyvsp[(1) - (1)].valor); }
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
 #line 55 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); /*printf("prim + prim: %d\n", $$);*/ }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)+(yyvsp[(3) - (3)].valor); }
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
 #line 56 "micro.y"
-    { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); /*printf("prim - prim: %d\n", $$);*/ }
+    { (yyval.valor)=(yyvsp[(1) - (3)].valor)-(yyvsp[(3) - (3)].valor); }
     break;
 
   case 15:
@@ -1434,12 +1440,12 @@ yyreduce:
   case 17:
 /* Line 1792 of yacc.c  */
 #line 61 "micro.y"
-    { (yyval.valor)=(yyvsp[(2) - (3)].valor); /*printf("(exp): %d\n",$2);*/ }
+    { (yyval.valor)=(yyvsp[(2) - (3)].valor); }
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 1443 "micro.tab.c"
+#line 1449 "micro.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1690,7 +1696,7 @@ int yyerror(char *s) {
 
 void escanearVariable(char *id) {
     int valorVariable;
-    printf("\nIngrese un valor para %s:", id);
+    printf("\nIngrese un valor para %s: ", id);
     scanf("%d", &valorVariable);
     escribirVariable(id, valorVariable);
 }
@@ -1718,7 +1724,6 @@ void escribirVariable(char *Name,int Val){
      if (i==NO_ENCONTRADO){
         x = buscarVariable("");
         if (x!=NO_ENCONTRADO){
-            // puts("entro y copia\n");
             strcpy(variables[x].nombre,Name);
             variables[x].valor=Val;
         }

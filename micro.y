@@ -40,25 +40,25 @@ listaSentencias: sentencia
 
 sentencia: ID ASIGNACION expresion PUNTOYCOMA { escribirVariable($1,$3); }
          | LEER PARENIZQUIERDO listaIdentificadores PARENDERECHO PUNTOYCOMA
-         | ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PUNTOYCOMA
+         | ESCRIBIR PARENIZQUIERDO listaExpresiones PARENDERECHO PUNTOYCOMA { printf("\n"); }
          ;
 
 listaIdentificadores: ID { escanearVariable($1); }
                     | listaIdentificadores COMA ID { escanearVariable($3); }
                     ;
 
-listaExpresiones: expresion { printf("%d\n", $1); }
-                | listaExpresiones COMA expresion { printf("%d\n", $3); }
+listaExpresiones: expresion { printf("%d", $1); }
+                | listaExpresiones COMA expresion { printf(" %d ", $3); }
                 ;
 
-expresion: primaria { $$=$1; /* printf("prim: %d\n", $1);*/ }
-         | primaria SUMA expresion { $$=$1+$3; /*printf("prim + prim: %d\n", $$);*/ }
-         | primaria RESTA expresion { $$=$1-$3; /*printf("prim - prim: %d\n", $$);*/ }
+expresion: primaria { $$=$1; }
+         | primaria SUMA expresion { $$=$1+$3; }
+         | primaria RESTA expresion { $$=$1-$3; }
          ;
 
 primaria: ID { $$ = leerVariable($1); /*Aca lee los id*/ }
         | CONSTANTE { $$=$1; }
-        | PARENIZQUIERDO expresion PARENDERECHO { $$=$2; /*printf("(exp): %d\n",$2);*/ }
+        | PARENIZQUIERDO expresion PARENDERECHO { $$=$2; }
         ;
 
 %%
@@ -79,7 +79,7 @@ int yyerror(char *s) {
 
 void escanearVariable(char *id) {
     int valorVariable;
-    printf("\nIngrese un valor para %s:", id);
+    printf("\nIngrese un valor para %s: ", id);
     scanf("%d", &valorVariable);
     escribirVariable(id, valorVariable);
 }
@@ -107,7 +107,6 @@ void escribirVariable(char *Name,int Val){
      if (i==NO_ENCONTRADO){
         x = buscarVariable("");
         if (x!=NO_ENCONTRADO){
-            // puts("entro y copia\n");
             strcpy(variables[x].nombre,Name);
             variables[x].valor=Val;
         }
